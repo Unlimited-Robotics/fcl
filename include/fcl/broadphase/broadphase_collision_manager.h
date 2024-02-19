@@ -49,15 +49,16 @@ namespace fcl
 /// @brief Callback for collision between two objects. Return value is whether
 /// can stop now.
 template <typename S>
-using CollisionCallBack = bool (*)(
-    CollisionObject<S>* o1, CollisionObject<S>* o2, void* cdata);
+using CollisionCallBack = std::function<bool(CollisionObject<S>* o1,
+                                              CollisionObject<S>* o2,
+                                              void* cdata)>;
 
 /// @brief Callback for distance between two objects, Return value is whether
 /// can stop now, also return the minimum distance till now.
 template <typename S>
-using DistanceCallBack = bool (*)(
+using DistanceCallBack = std::function<bool(
     CollisionObject<S>* o1,
-    CollisionObject<S>* o2, void* cdata, S& dist);
+    CollisionObject<S>* o2, void* cdata, S& dist)>;
 
 /// @brief Base class for broad phase collision. It helps to accelerate the
 /// collision/distance between N objects. Also support self collision, self
